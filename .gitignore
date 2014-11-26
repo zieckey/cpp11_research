@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+
+bin/
+cxx11hello.opensdf
+cxx11hello.sdf
+cxx11hello.v12.suo
+
