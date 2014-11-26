@@ -6,10 +6,10 @@ AR=ar
 ARFLAGS=cru
 CURRENT_DIR=$(shell echo `pwd`)
 PARENT_DIRNAME=$(shell basename $(shell dirname $(CURRENT_DIR)))
-SOURCE_DIR=$(CURRENT_DIR)/src
+SOURCE_DIR=$(CURRENT_DIR)
 CFLAGS=$(TOP_CFLAGS) -g -c -D_DEBUG -D_USE_GTEST -fPIC -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wsign-compare -Winvalid-pch -fms-extensions -Wall -I${SOURCE_DIR}/../3rdparty -MMD
 CPPFLAGS=-Woverloaded-virtual -Wsign-promo -fno-gnu-keywords  -std=c++0x
-LDFLAGS=-L/usr/local/lib -lpthread -lgtest -lgtest_main
+LDFLAGS=-L/usr/local/lib -lgtest -lgtest_main -lpthread 
 DIRNAME=$(shell basename `pwd`)
 
 #SRCS := $(filter-out main.cc,$(ALLSRCS))
@@ -17,16 +17,14 @@ SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc, %.o, $(SRCS))
 DEPS := $(patsubst %.o, %.d, $(OBJS))
 
-TARGET=$(PARENT_DIRNAME)_$(DIRNAME)
+TARGET=$(PARENT_DIRNAME)
 
 all : $(TARGET) 
-	$(MAKE) install
 
 check : $(TARGET)
 	./$^
 
 $(TARGET) : $(OBJS)
-	$(MAKE) -C ..
 	$(CXX) $(OBJS) $(LDFLAGS) -o $@
 
 -include $(DEPS)
