@@ -4,20 +4,40 @@
 #include <thread>
 #include <atomic>
 
-static void func(const std::string& name, std::atomic<int>* count)
+static void CountInc(const std::string& name, std::atomic<int>* count)
 {
     count->fetch_add(1);
     std::cout << "Thread id=" << std::this_thread::get_id() << " name=" << name << std::endl;
     std::flush(std::cout);
 }
 
+namespace
+{
+    struct User
+    {
+        std::string name;
+        std::string addr;
+
+        void Print(const std::string& message, std::atomic<int>* count)
+        {
+            count->fetch_add(1);
+            std::cout << "Thread id=" << std::this_thread::get_id() << " message=" << message << " name=" << name << " addr=" << addr << std::endl;
+        }
+    };
+}
+
 TEST_UNIT(thread_test)
 {
+    User u;
+    u.name = "zieckey";
+    u.addr = "beijing";
     std::atomic<int> count;
-    std::thread t1(func, "thread1", &count);
-    std::thread t2(func, "thread2", &count);
+    std::thread t1(CountInc, "thread1", &count);
+    std::thread t2(&CountInc, "thread2", &count);
+    std::thread t3(std::bind(&User::Print, &u, "user", &count));
     t1.join();
     t2.join();
-    H_TEST_ASSERT(count == 2);
+    t3.join();
+    H_TEST_ASSERT(count == 3);
 }
 
