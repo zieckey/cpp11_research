@@ -19,6 +19,9 @@
     <ClCompile Include="future.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="lambda.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_common.h">
