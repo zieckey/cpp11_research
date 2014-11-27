@@ -27,7 +27,8 @@ check: prepare
 	$(MAKE) check -C src/cloud_rule
 
 prepare:
-#mkdir -p install/lib
+	mkdir -p install/lib
+	mkdir -p install/bin
 	
 clean:
 	for t in $(SUBDIRS); do $(MAKE) clean -C $$t; done
