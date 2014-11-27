@@ -29,9 +29,10 @@ TEST_UNIT(lambda_test1)
 
 
 
+using namespace std;
+
 TEST_UNIT(lambda_test2)
 {
-    using namespace std;
 
     // Create a vector object that contains 10 elements.
     vector<int> v;
@@ -59,3 +60,24 @@ TEST_UNIT(lambda_test2)
         << " even numbers in the vector." << endl;
 }
 
+
+TEST_UNIT(lambda_test3)
+{
+    int x = 10;
+    int y = 3;
+    int z = 0;
+
+    //因为是以值传递的方式访问x,y所以x,y的值并没有发生改变
+    z = [=]()mutable throw() -> int { int n = x + y; x = y; y = n; return n; }();
+    cout << "z:" << z << "\tx:" << x << "\t" << "y:" << y << endl;
+    H_TEST_ASSERT(x == 10);
+    H_TEST_ASSERT(y == 3);
+    H_TEST_ASSERT(z == 13);
+
+    //因为是以引用传递的方式访问x,y所以x,y的值已经发生改变
+    z = [&]()mutable throw() -> int { int n = x + y; x = y; y = n; return n; }();
+    cout << "z:" << z << "\tx:" << x << "\t" << "y:" << y << endl;
+    H_TEST_ASSERT(y == 13);
+    H_TEST_ASSERT(x == 3);
+    H_TEST_ASSERT(z == 13);
+}
