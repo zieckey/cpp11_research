@@ -82,3 +82,29 @@ TEST_UNIT(lambda_test3)
     H_TEST_ASSERT(x == 3);
     H_TEST_ASSERT(z == 13);
 }
+
+TEST_UNIT(lambda_test4)
+{
+    int n = [](int x, int y) { return x + y; }(5, 4);
+    H_TEST_ASSERT(n == 9);
+
+    auto f = [](int x, int y) { return x + y; };
+    H_TEST_ASSERT(f(5, 4) == 9);
+}
+
+TEST_UNIT(lambda_test5)
+{
+    int a[10] = { 0 };
+
+    srand(time(NULL));
+    generate(a, a + 10, []()->int { return rand() % 100; });
+
+    cout << "before sort: " << endl;
+    for_each(a, a + 10, [&](int i){ cout << i << " "; });
+    cout << endl;
+
+    cout << "After sort" << endl;
+    sort(a, a + 10);
+    for_each(a, a + 10, [&](int i){ cout << i << " "; });
+    cout << endl;
+}
