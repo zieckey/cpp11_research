@@ -43,7 +43,7 @@ TEST_UNIT(lambda_test2)
     // Count the number of even numbers in the vector by 
     // using the for_each function and a lambda.   这里相当于创建了一个函数对象，构造函数的参数为（&evenCount）
     int evenCount = 0;
-    for_each(v.begin(), v.end(), [&evenCount](int n) {
+    for_each(v.begin(), v.end(), [&evenCount](int n) { //这里与   [&](int n){...}  等价
         cout << n;
 
         if (n % 2 == 0) {
@@ -58,6 +58,7 @@ TEST_UNIT(lambda_test2)
     // Print the count of even numbers to the console.
     cout << "There are " << evenCount
         << " even numbers in the vector." << endl;
+    H_TEST_ASSERT(evenCount == 5);
 }
 
 
