@@ -33,7 +33,7 @@ TEST_UNIT(thread_test1)
     User u;
     u.name = "zieckey";
     u.addr = "beijing";
-    std::atomic<int> count;
+    std::atomic<int> count(0);
     std::thread t1(CountInc, "thread1", &count);
     std::thread t2(&CountInc, "thread2", &count);
     std::thread t3(std::bind(&User::Print, &u, "user", &count));
