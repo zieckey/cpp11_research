@@ -35,5 +35,13 @@ public: \
 #define H_TEST_ASSERT ASSERT_TRUE
 #define H_TEST_EQUAL(x, y) H_TEST_ASSERT((x)==(y))
 
+
+
+
+#define H_ARRAYSIZE(a) \
+    ((sizeof(a) / sizeof(*(a))) / \
+    static_cast<size_t>(!(sizeof(a) % sizeof(*(a)))))
+
+
 #endif
 

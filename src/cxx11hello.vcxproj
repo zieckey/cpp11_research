@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bloomfilter.cc" />
     <ClCompile Include="future.cc" />
     <ClCompile Include="lambda.cc" />
     <ClCompile Include="main.cc" />

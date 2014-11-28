@@ -16,6 +16,8 @@ TEST_UNIT(log_test)
     //e是一个无限不循环小数，其值约等于2.718281828
     //Computes the the natural (base e) logarithm of arg.
     double f1 = std::log(2);
-    //f1 = 0.69314718055994529
     H_TEST_ASSERT(f1 == 0.69314718055994529);
+
+    std::cout << "log(1) = " << std::log(1) << '\n'
+        << "base-5 logarithm of 125 = " << std::log(125) / std::log(5) << '\n';
 }
