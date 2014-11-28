@@ -96,7 +96,7 @@ TEST_UNIT(lambda_test5)
 {
     int a[10] = { 0 };
 
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     generate(a, a + 10, []()->int { return rand() % 100; });
 
     cout << "before sort: " << endl;
