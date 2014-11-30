@@ -70,7 +70,7 @@ namespace
         //m >= log2(e) * (n * log2(1/E))
         //(4)给定m和n，可以确定最优hash个数，即k = ln2 * (m/n)，此时错误率最小；
         size_t another_m3 = n * std::log2(e) * std::log2(1 / e) / bits_per_char;
-        size_t another_k3 = size_t(std::log(2)*(double(another_m3*bits_per_char) / n));
+        size_t another_k3 = size_t(std::log(2)*(double(another_m3*bits_per_char) / n)); (void)another_k3;
 
         //see https://github.com/jaybaird/python-bloomfilter/blob/master/pybloom/pybloom.py
         // # given M = num_bits, k = num_slices, P = error_rate, n = capacity
@@ -155,9 +155,9 @@ TEST_UNIT(bloomfilter_test)
     cout << "find_optimal_parameters:\n";
     size_t element_counts[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
     double error_probalitiy[] = { 0.001, 0.0001, 0.00001, 0.000001 };
-    for (int n = 0; n < H_ARRAYSIZE(element_counts); n++)
+    for (size_t n = 0; n < H_ARRAYSIZE(element_counts); n++)
     {
-        for (int j = 0; j < H_ARRAYSIZE(error_probalitiy); j++)
+        for (size_t j = 0; j < H_ARRAYSIZE(error_probalitiy); j++)
         {
             find_optimal_parameters(element_counts[n], error_probalitiy[j]);
         }
