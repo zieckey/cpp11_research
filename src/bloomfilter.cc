@@ -70,7 +70,7 @@ namespace
         //m >= log2(e) * (n * log2(1/E))
         //(4)给定m和n，可以确定最优hash个数，即k = ln2 * (m/n)，此时错误率最小；
         size_t another_m3 = n * std::log2(e) * std::log2(1 / e) / bits_per_char;
-        size_t another_k3 = size_t(std::log(2)*(double(another_m3*bits_per_char) / n));
+        size_t another_k3 = size_t(std::log(2)*(double(another_m3*bits_per_char) / n)); (void)another_k3;
 
         //see https://github.com/jaybaird/python-bloomfilter/blob/master/pybloom/pybloom.py
         // # given M = num_bits, k = num_slices, P = error_rate, n = capacity
