@@ -155,9 +155,9 @@ TEST_UNIT(bloomfilter_test)
     cout << "find_optimal_parameters:\n";
     size_t element_counts[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
     double error_probalitiy[] = { 0.001, 0.0001, 0.00001, 0.000001 };
-    for (int n = 0; n < H_ARRAYSIZE(element_counts); n++)
+    for (size_t n = 0; n < H_ARRAYSIZE(element_counts); n++)
     {
-        for (int j = 0; j < H_ARRAYSIZE(error_probalitiy); j++)
+        for (size_t j = 0; j < H_ARRAYSIZE(error_probalitiy); j++)
         {
             find_optimal_parameters(element_counts[n], error_probalitiy[j]);
         }

@@ -28,6 +28,9 @@
     <ClCompile Include="bloomfilter.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="move.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_common.h">

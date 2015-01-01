@@ -12,12 +12,15 @@
     #endif
 #endif
 
-#ifdef WIN32
-struct OnExit
+namespace
 {
-    ~OnExit()
+#ifdef WIN32
+    struct OnAppExit
     {
-        system("pause");
-    }
-} __s_onexit_pause;
+        ~OnAppExit()
+        {
+            system("pause");
+        }
+    } __s_onexit_pause;
 #endif
+}
