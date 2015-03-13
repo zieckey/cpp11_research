@@ -1,20 +1,41 @@
 # weizili@360.cn 
 
-CC=gcc
-CXX=g++
-AR=ar
-ARFLAGS=cru
+PLATFORM := $(shell uname)
+PLATFORM_VERSION := $(shell uname -r| awk -F 'el' '{printf("el%d", substr($$2,1,1))}')
+
+ifeq ($(PLATFORM_VERSION),el6)
+GCC472_PATH=/home/s/gcc-4.9.2
+CXX := env LD_LIBRARY_PATH=$(GCC472_PATH)/lib $(GCC472_PATH)/bin/g++
+else
+CXX := g++
+endif
+
 CURRENT_DIR=$(shell echo `pwd`)
 PARENT_DIRNAME=$(shell basename $(shell dirname $(CURRENT_DIR)))
 SOURCE_DIR=$(CURRENT_DIR)
 PREFIX=$(CURRENT_DIR)/../install
-CFLAGS=$(TOP_CFLAGS) -g -c -D_DEBUG -D_USE_GTEST -fPIC -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings -Wsign-compare -Winvalid-pch -fms-extensions -Wall -I${SOURCE_DIR}/../3rdparty -MMD
-CPPFLAGS=-Woverloaded-virtual -Wsign-promo -fno-gnu-keywords -std=c++11
-LDFLAGS=-L/usr/local/lib -lgtest -lgtest_main -lpthread 
+
+GTESTDIR = linux_gtest
+
+CPPFLAGS= -g -c -fPIC \
+		  -D_DEBUG -D_USE_GTEST \
+		  -Wshadow -Wcast-qual -Wcast-align -Wwrite-strings \
+		  -Wsign-compare -Winvalid-pch -fms-extensions -Wall \
+		  -MMD -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords -std=c++11 \
+		  -I ./$(GTESTDIR)\
+		  -I $(SOURCE_DIR)/../3rdparty \
+
+RTFLAGS := \
+    -Wl,-rpath=. \
+    -Wl,-rpath=$(GCC472_PATH)/lib64
+
+#LDFLAGS= $(RTFLAGS) -lgtest -lgtest_main -lpthread 
+LDFLAGS= $(RTFLAGS) -lpthread 
+
 DIRNAME=$(shell basename `pwd`)
 
 #SRCS := $(filter-out main.cc,$(ALLSRCS))
-SRCS := $(wildcard *.cc)
+SRCS := $(wildcard *.cc) $(GTESTDIR)/src/gtest-all.cc $(GTESTDIR)/src/gtest_main.cc
 OBJS := $(patsubst %.cc, %.o, $(SRCS))
 DEPS := $(patsubst %.o, %.d, $(OBJS))
 
@@ -41,6 +62,7 @@ t:
 	@echo "OBJS:" $(OBJS)
 	@echo "CFLAGS:" $(CFLAGS)
 	@echo "CPPFLAGS:" $(CPPFLAGS)
+	@echo $(PLATFORM_VERSION)
 
 install: $(TARGET) 
 	cp -f $(TARGET) $(PREFIX)/bin
