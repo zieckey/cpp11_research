@@ -1,5 +1,3 @@
-# weizili@360.cn 
-
 PLATFORM := $(shell uname)
 PLATFORM_VERSION := $(shell uname -r| awk -F 'el' '{printf("el%d", substr($$2,1,1))}')
 
