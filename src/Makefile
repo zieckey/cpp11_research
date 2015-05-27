@@ -2,8 +2,8 @@ PLATFORM := $(shell uname)
 PLATFORM_VERSION := $(shell uname -r| awk -F 'el' '{printf("el%d", substr($$2,1,1))}')
 
 ifeq ($(PLATFORM_VERSION),el6)
-GCC472_PATH=/home/s/gcc-4.9.2
-CXX := env LD_LIBRARY_PATH=$(GCC472_PATH)/lib $(GCC472_PATH)/bin/g++
+GCC_PATH=/home/s/gcc-4.9.2
+CXX := env LD_LIBRARY_PATH=$(GCC_PATH)/lib $(GCC_PATH)/bin/g++
 else
 CXX := g++
 endif
@@ -22,13 +22,15 @@ CPPFLAGS= -g -c -fPIC \
 		  -MMD -Woverloaded-virtual -Wsign-promo -fno-gnu-keywords -std=c++11 \
 		  -I ./$(GTESTDIR)\
 		  -I $(SOURCE_DIR)/../3rdparty \
+		  -I /home/s/safe/include \
 
 RTFLAGS := \
     -Wl,-rpath=. \
-    -Wl,-rpath=$(GCC472_PATH)/lib64
+    -Wl,-rpath=/home/s/safe/lib \
+    -Wl,-rpath=$(GCC_PATH)/lib64
 
 #LDFLAGS= $(RTFLAGS) -lgtest -lgtest_main -lpthread 
-LDFLAGS= $(RTFLAGS) -lpthread 
+LDFLAGS= $(RTFLAGS) -L/home/s/safe/lib -lpthread -lwdurlsplit -ldl
 
 DIRNAME=$(shell basename `pwd`)
 
