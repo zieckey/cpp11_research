@@ -2,6 +2,7 @@ PLATFORM := $(shell uname)
 PLATFORM_VERSION := $(shell uname -r| awk -F 'el' '{printf("el%d", substr($$2,1,1))}')
 
 ifeq ($(PLATFORM_VERSION),el6)
+GCC_PATH=/usr/local/gcc-4.7.2
 GCC_PATH=/home/s/gcc-4.9.2
 CXX := env LD_LIBRARY_PATH=$(GCC_PATH)/lib $(GCC_PATH)/bin/g++
 else
