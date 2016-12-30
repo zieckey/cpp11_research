@@ -8,12 +8,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="gtest">
+      <UniqueIdentifier>{775b05b3-d4e1-46ea-9c8c-5b74d9e98ec7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="thread.cc">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cc">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="future.cc">
@@ -30,6 +30,15 @@
     </ClCompile>
     <ClCompile Include="move.cc">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\gtest\src\gtest-all.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cc">
+      <Filter>gtest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
