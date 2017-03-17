@@ -3,7 +3,7 @@
 
 namespace
 {
-#ifdef WIN32
+#ifdef _WIN32
     struct OnAppExit
     {
         ~OnAppExit()

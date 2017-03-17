@@ -28,12 +28,4 @@
 *.app
 
 
-bin/
-cxx11hello.opensdf
-cxx11hello.sdf
-cxx11hello.v12.suo
-src/cxx11hello
-*.d
-cxx11hello.VC.VC.opendb
-cxx11hello.VC.db
-
+build
