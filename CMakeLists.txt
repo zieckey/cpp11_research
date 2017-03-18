@@ -48,6 +48,7 @@ message (STATUS "EXECUTABLE_OUTPUT_PATH " ${EXECUTABLE_OUTPUT_PATH})
 message (STATUS "LIBRARY_OUTPUT_PATH " ${LIBRARY_OUTPUT_PATH})
 
 add_subdirectory (src)
+add_subdirectory (asio)
 
 include (CPack)
 include (CTest)
