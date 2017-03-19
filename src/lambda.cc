@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <memory>
 
 TEST_UNIT(lambda_test1)
 {
@@ -107,4 +108,16 @@ TEST_UNIT(lambda_test5)
     sort(a, a + 10);
     for_each(a, a + 10, [&](int i){ cout << i << " "; });
     cout << endl;
+}
+
+TEST_UNIT(lambda_test6) {
+    int* p1 = new int(1);
+    int* p2 = new int(2);
+    auto f = [p1, p2]() {
+        *p2 += 1;
+        delete p2;
+        *p1 += 1;
+        delete p1;
+    };
+    f();
 }
