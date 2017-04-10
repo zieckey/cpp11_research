@@ -1,6 +1,7 @@
 #include "test_common.h"
 
 #include <iostream>
+#include <functional>
 
 class Moveable{
 public:
@@ -27,7 +28,7 @@ public:
         *i = x;
     }
 
-    const int* Get() {
+    const int* Get() const {
         return i;
     }
 private:
@@ -84,8 +85,49 @@ void stdmove_test2() {
     */
 }
 
+void print(Moveable&& h) {
+    std::cout << __func__ << " 调用移动语义的参数 ptr(i)=" << h.Get() << std::endl;
+}
+
+void print(const Moveable& h) {
+    std::cout << __func__ << " 调用const普通语义的参数 ptr(i)=" << h.Get() << std::endl;
+}
+
+void stdmove_test3() {
+    Moveable m;
+    print(m);
+    print(std::move(m));
+    /*
+    Moveable::Moveable() 构造函数 : ptr(i)=00520DD0
+    print 调用const普通语义的参数 ptr(i)=00520DD0
+    print 调用移动语义的参数 ptr(i)=00520DD0
+    Moveable::~Moveable() 析构函数 ptr(i)=00520DD0
+    */
+}
+
+typedef std::function<void()> Handler;
+class Timer {
+public:
+    Timer(const Handler& h) : fn_(h) {}
+    Timer(Handler&& h) : fn_(std::move(h)) {}
+
+    void OnTimer() { fn_(); }
+private:
+    Handler fn_;
+};
+
+void stdmove_test4() {
+    // TODO
+}
+
+
+
 TEST_UNIT(stdmove_test) {
     stdmove_test1();
     std::cout << std::endl;
     stdmove_test2();
+    std::cout << std::endl;
+    stdmove_test3();
+    std::cout << std::endl;
+    stdmove_test4();
 }
