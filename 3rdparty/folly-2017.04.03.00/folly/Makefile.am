@@ -210,54 +210,6 @@ nobase_follyinclude_HEADERS = \
 	io/RecordIO-inl.h \
 	io/TypedIOBuf.h \
 	io/ShutdownSocketSet.h \
-	io/async/AsyncPipe.h \
-	io/async/AsyncTimeout.h \
-	io/async/AsyncTransport.h \
-	io/async/AsyncUDPServerSocket.h \
-	io/async/AsyncUDPSocket.h \
-	io/async/AsyncServerSocket.h \
-	io/async/AsyncSignalHandler.h \
-	io/async/AsyncSocket.h \
-	io/async/AsyncSocketBase.h \
-	io/async/AsyncSSLSocket.h \
-	io/async/AsyncSocketException.h \
-	io/async/DecoratedAsyncTransportWrapper.h \
-	io/async/DelayedDestructionBase.h \
-	io/async/DelayedDestruction.h \
-	io/async/EventBase.h \
-	io/async/EventBaseLocal.h \
-	io/async/EventBaseManager.h \
-	io/async/EventBaseThread.h \
-	io/async/EventFDWrapper.h \
-	io/async/EventHandler.h \
-	io/async/EventUtil.h \
-	io/async/NotificationQueue.h \
-	io/async/HHWheelTimer.h \
-	io/async/ssl/OpenSSLPtrTypes.h \
-	io/async/ssl/OpenSSLUtils.h \
-	io/async/ssl/SSLErrors.h \
-	io/async/ssl/TLSDefinitions.h \
-	io/async/Request.h \
-	io/async/SSLContext.h \
-	io/async/ScopedEventBaseThread.h \
-	io/async/TimeoutManager.h \
-	io/async/VirtualEventBase.h \
-	io/async/WriteChainAsyncTransportWrapper.h \
-	io/async/test/AsyncSSLSocketTest.h \
-	io/async/test/AsyncSocketTest2.h \
-	io/async/test/BlockingSocket.h \
-	io/async/test/MockAsyncSocket.h \
-	io/async/test/MockAsyncServerSocket.h \
-	io/async/test/MockAsyncSSLSocket.h \
-	io/async/test/MockAsyncTransport.h \
-	io/async/test/MockAsyncUDPSocket.h \
-	io/async/test/MockTimeoutManager.h \
-	io/async/test/ScopedBoundPort.h \
-	io/async/test/SocketPair.h \
-	io/async/test/TestSSLServer.h \
-	io/async/test/TimeUtil.h \
-	io/async/test/UndelayedDestruction.h \
-	io/async/test/Util.h \
 	json.h \
 	Lazy.h \
 	LifoSem.h \
@@ -300,7 +252,6 @@ nobase_follyinclude_HEADERS = \
 	portability/Malloc.h \
 	portability/Math.h \
 	portability/Memory.h \
-	portability/OpenSSL.h \
 	portability/PThread.h \
 	portability/Sockets.h \
 	portability/Stdio.h \
@@ -342,11 +293,6 @@ nobase_follyinclude_HEADERS = \
 	SpinLock.h \
 	SpookyHashV1.h \
 	SpookyHashV2.h \
-	ssl/OpenSSLCertUtils.h \
-	ssl/OpenSSLHash.h \
-	ssl/OpenSSLVersionFinder.h \
-	ssl/SSLSession.h \
-	ssl/detail/SSLSessionImpl.h \
 	stats/BucketedTimeSeries-defs.h \
 	stats/BucketedTimeSeries.h \
 	stats/Histogram-defs.h \
@@ -452,29 +398,6 @@ libfolly_la_SOURCES = \
 	io/IOBufQueue.cpp \
 	io/RecordIO.cpp \
 	io/ShutdownSocketSet.cpp \
-	io/async/AsyncPipe.cpp \
-	io/async/AsyncTimeout.cpp \
-	io/async/AsyncUDPSocket.cpp \
-	io/async/AsyncServerSocket.cpp \
-	io/async/AsyncSignalHandler.cpp \
-	io/async/AsyncSocket.cpp \
-	io/async/AsyncSSLSocket.cpp \
-	io/async/EventBase.cpp \
-	io/async/EventBaseLocal.cpp \
-	io/async/EventBaseManager.cpp \
-	io/async/EventBaseThread.cpp \
-	io/async/EventHandler.cpp \
-	io/async/Request.cpp \
-	io/async/SSLContext.cpp \
-	io/async/ScopedEventBaseThread.cpp \
-	io/async/VirtualEventBase.cpp \
-	io/async/HHWheelTimer.cpp \
-	io/async/TimeoutManager.cpp \
-	io/async/test/ScopedBoundPort.cpp \
-	io/async/test/SocketPair.cpp \
-	io/async/test/TimeUtil.cpp \
-	io/async/ssl/OpenSSLUtils.cpp \
-	io/async/ssl/SSLErrors.cpp \
 	json.cpp \
 	detail/MemoryIdler.cpp \
 	detail/SocketFastOpen.cpp \
@@ -485,7 +408,6 @@ libfolly_la_SOURCES = \
 	portability/Libgen.cpp \
 	portability/Malloc.cpp \
 	portability/Memory.cpp \
-	portability/OpenSSL.cpp \
 	portability/Sockets.cpp \
 	portability/Stdio.cpp \
 	portability/Stdlib.cpp \
@@ -509,9 +431,6 @@ libfolly_la_SOURCES = \
 	SocketAddress.cpp \
 	SpookyHashV1.cpp \
 	SpookyHashV2.cpp \
-	ssl/OpenSSLCertUtils.cpp \
-	ssl/OpenSSLHash.cpp \
-	ssl/detail/SSLSessionImpl.cpp \
 	stats/Instantiations.cpp \
 	Subprocess.cpp \
 	ThreadCachedArena.cpp \
@@ -599,7 +518,7 @@ libfollybase_la_LIBADD = libfollybasesse42.la
 libfollybase_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LT_VERSION)
 
 libfolly_la_LIBADD = libfollybase.la
-libfolly_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LT_VERSION) -lssl
+libfolly_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LT_VERSION) 
 
 FingerprintTables.cpp: generate_fingerprint_tables
 	./generate_fingerprint_tables
