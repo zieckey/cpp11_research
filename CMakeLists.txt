@@ -47,8 +47,12 @@ message (STATUS "CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS})
 message (STATUS "EXECUTABLE_OUTPUT_PATH " ${EXECUTABLE_OUTPUT_PATH})
 message (STATUS "LIBRARY_OUTPUT_PATH " ${LIBRARY_OUTPUT_PATH})
 
+set(BOOST_ROOT "d:/cppworkspace/boost_1_58_0/output")
+find_package (Boost)
+
 add_subdirectory (src)
 add_subdirectory (asio)
+add_subdirectory (folly)
 
 include (CPack)
 include (CTest)
